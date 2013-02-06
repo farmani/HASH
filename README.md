@@ -1,0 +1,4 @@
+HASH
+====
+
+Component hashing.
