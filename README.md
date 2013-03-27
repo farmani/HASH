@@ -21,7 +21,7 @@ $crypt = HASH::getInstance(HASH::PASSWORD, array(
 
 ## Information
 * [Official page](http://www.octolab.org/libraries/hash)
-* You can read a useful [article](http://www.yiiframework.com/wiki/425/use-crypt-for-password-storage/) about using crypt() function for password storage (in particular about advantages of the [Blowfish algorithm](http://en.wikipedia.org/wiki/Blowfish_(cipher))) on Yii wiki pages
+* You can read a useful [article](http://www.yiiframework.com/wiki/425/use-crypt-for-password-storage/) about using crypt() function for password storage (in particular about advantages of the [Blowfish algorithm](http://en.wikipedia.org/wiki/Blowfish_%28cipher%29) on Yii framework wiki pages
 
 
 
@@ -30,7 +30,7 @@ $crypt = HASH::getInstance(HASH::PASSWORD, array(
 
 
 ## Preparation
-Classes are connected via a **relative path**. And therefore you must add parent folder of the Library into include path.
+Classes are connected via a **relative path**. And therefore you must add parent folder of the Library into include path:
 
 ```php
 set_include_path(get_include_path() . PATH_SEPARATOR . 'path/to/folder/which/contains/HASH');
@@ -102,7 +102,7 @@ if ($this->hash->pass->compare($input, $stored)) {
 ### Silex
 SLX_Hash designed for handy integration of the Library with [Silex framework](http://silex.sensiolabs.org/).
 
-Temporary access to the Library implemented via ServiceProvider:
+Access to the Library implemented via ServiceProvider:
 
 ```php
 use \HASH\adapters\SLX_Hash as Hash;
