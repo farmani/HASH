@@ -59,7 +59,7 @@ CI_Hash designed for handy integration of the Library with [CodeIgniter framewor
 You can define configuration of the Library in hash.php file in config folder of CodeIgniter:
 
 ```php
-$config['hash'] = array(
+$config = array(
 	'pass' => array(
 		'strategy' => HASH::SHA1_MD5_SALT,
 		'salt' => 'q3XBgoiRCXfuTertfplXv1ICT',
