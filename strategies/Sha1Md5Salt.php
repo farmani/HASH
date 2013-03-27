@@ -5,7 +5,7 @@
  */
 namespace HASH\strategies;
 use HASH\abstracts\SimpleSalted;
-class_exists('SimpleSalted') or require 'HASH/abstracts/SimpleSalted.php';
+class_exists('HASH\abstracts\SimpleSalted', false) or require 'HASH/abstracts/SimpleSalted.php';
 /**
  * @package HASH.strategies
  * @since 1.0

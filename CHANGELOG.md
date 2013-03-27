@@ -1,5 +1,5 @@
 # 1.1 (And this)
-* Add Blowfish strategies
+* Add Blowfish algorithm
 	* SimpleBlowfish (base for strategies family)
 	* Blowfish
 	* BlowfishSalt

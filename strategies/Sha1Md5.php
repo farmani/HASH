@@ -5,7 +5,7 @@
  */
 namespace HASH\strategies;
 use HASH\abstracts\SimpleHash;
-class_exists('SimpleHash') or require 'HASH/abstracts/SimpleHash.php';
+class_exists('HASH\abstracts\SimpleHash', false) or require 'HASH/abstracts/SimpleHash.php';
 /**
  * @package HASH.strategies
  * @since 1.0

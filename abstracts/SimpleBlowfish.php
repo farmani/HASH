@@ -5,7 +5,7 @@
  */
 namespace HASH\abstracts;
 use \Exception;
-class_exists('SimpleSalted') or require 'SimpleSalted.php';
+class_exists('HASH\abstracts\SimpleSalted', false) or require 'SimpleSalted.php';
 /**
  * @package HASH.abstracts
  * @since 1.1
@@ -31,7 +31,7 @@ abstract class SimpleBlowfish extends SimpleSalted
 			throw new Exception('_invalid_cost');
 		}
 		if (isset($config['salt'])) {
-			if ( ! preg_match('^[./0-9A-Z-a-z]{1,22}$', $config['salt'])) {
+			if ( ! preg_match('/^[.\/0-9A-Z-a-z]{1,22}$/', $config['salt'])) {
 				throw new Exception('_invalid_salt');
 			}
 			$this->_salt = str_pad($config['salt'], 22, '0');

@@ -5,23 +5,6 @@
  */
 namespace HASH;
 use HASH\interfaces\iHash;
-use HASH\strategies\Blowfish;
-use HASH\strategies\BlowfishRandomSalt;
-use HASH\strategies\BlowfishSalt;
-use HASH\strategies\Md5;
-use HASH\strategies\Md5Salt;
-use HASH\strategies\Md5SaltSha1;
-use HASH\strategies\Md5Sha1;
-use HASH\strategies\Md5Sha1Salt;
-use HASH\strategies\SaltMd5;
-use HASH\strategies\SaltMd5Sha1;
-use HASH\strategies\SaltSha1;
-use HASH\strategies\SaltSha1Md5;
-use HASH\strategies\Sha1;
-use HASH\strategies\Sha1Md5;
-use HASH\strategies\Sha1Md5Salt;
-use HASH\strategies\Sha1Salt;
-use HASH\strategies\Sha1SaltMd5;
 use \Exception;
 /**
  * @package HASH
@@ -102,20 +85,20 @@ abstract class HASH
 	 * 	['cost' => '%string',]
 	 * );
 	 * </code>
-	 * @param int $key
+	 * @param int|string $task
 	 * @param array $config
 	 * @return iHash
 	 * @throws Exception
 	 */
-	public static function getInstance($key = self::COMMON, array $config = array())
+	public static function getInstance($task = self::COMMON, array $config = array())
 	{
-		if ( ! is_int($key)) {
+		if ( ! is_int($task) && ( ! is_string($task) or empty($task))) {
 			throw new Exception('_invalid_args');
 		}
-		if ( ! isset(self::$_instances[$key])) {
+		if ( ! isset(self::$_instances[$task])) {
 			$config = array_merge(
 				array(
-					'strategy' => isset(self::$_tasksMap[$key]) ? self::$_tasksMap[$key] : self::$_tasksMap[self::COMMON],
+					'strategy' => isset(self::$_tasksMap[$task]) ? self::$_tasksMap[$task] : self::$_tasksMap[self::COMMON],
 					'salt' => substr(md5(__CLASS__), 0, 22),
 					'cost' => 11,
 				),
@@ -124,12 +107,13 @@ abstract class HASH
 			if ( ! isset(self::$_strategiesMap[$config['strategy']])) {
 				throw new Exception('_unknown_strategy');
 			}
-			$strategy = self::$_strategiesMap[$config['strategy']];
-			class_exists($strategy) or require "HASH/strategies/{$strategy}.php";
-			self::$_instances[$key] = new $strategy($config);
+			$file = self::$_strategiesMap[$config['strategy']];
+			$strategy = "HASH\\strategies\\{$file}";
+			class_exists($strategy, false) or require "HASH/strategies/{$file}.php";
+			self::$_instances[$task] = new $strategy($config);
 		} elseif ( ! empty($config)) {
 			throw new Exception('_already_exist_and_unmodified');
 		}
-		return self::$_instances[$key];
+		return self::$_instances[$task];
 	}
 }

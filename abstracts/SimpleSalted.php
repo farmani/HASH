@@ -5,7 +5,7 @@
  */
 namespace HASH\abstracts;
 use \Exception;
-class_exists('SimpleHash') or require 'SimpleHash.php';
+class_exists('HASH\abstracts\SimpleHash', false) or require 'SimpleHash.php';
 /**
  * @package HASH.abstracts
  * @since 1.0
