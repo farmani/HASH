@@ -8,10 +8,10 @@ Main purpose of the Library is **encapsulate** hashing mechanisms and **give** t
 // give default strategy (task: HASH::COMMON, strategy: HASH::MD5)
 $crypt = HASH::getInstance();
 
-// give default strategy for password caching (strategy: HASH::SHA1_MD5)
+// give default strategy for password hashing (strategy: HASH::SHA1_MD5)
 $crypt = HASH::getInstance(HASH::PASSWORD);
 
-// give selected strategy for password caching
+// give selected strategy for password hashing
 $crypt = HASH::getInstance(HASH::PASSWORD, array(
 	'strategy' => HASH::MD5_SALT_SHA1,		// some strategies require salt, by default $salt = substr(md5(__CLASS__), 0, 22)
 	'salt' => $this->config->item('salt'),	// salt, for example, can be stored globally in the site settings
@@ -53,8 +53,43 @@ if ($crypt->compare($input, $stored)) {
 
 
 ## Adapters
+### Yii
+Yii_Hash designed for handy integration the Library with [Yii framework](http://www.yiiframework.com/).
+
+Setup configuration of the Library:
+```php
+Yii::setPathOfAlias('HASH', 'path/to/folder/which/contains/HASH'); // set namespace
+
+return array(
+	...,
+	'components' => array(
+		...,
+		'hash' => array(
+			'class' => 'HASH\adapters\YII_Hash',
+			'strategies' => array(
+				'pass' => array(
+					'strategy' => HASH\HASH::BLOWFISH_RANDOM_SALT,
+					'cost' => 12,
+				),
+			),
+		),
+	),
+);
+```
+
+After that you can use it as usual component Yii:
+```php
+$hash = Yii::app()->hash->pass->make($input);
+
+if (Yii::app()->hash->pass->compare($input, $stored)) {
+	echo 'Match';
+} else {
+	echo 'Do not match';
+}
+```
+
 ### CodeIgniter
-CI_Hash designed for handy integration of the Library with [CodeIgniter framework](http://ellislab.com/codeigniter).
+CI_Hash designed for handy integration the Library with [CodeIgniter framework](http://ellislab.com/codeigniter).
 
 You can define configuration of the Library in hash.php file in config folder of CodeIgniter:
 
@@ -100,7 +135,7 @@ if ($this->hash->pass->compare($input, $stored)) {
 ```
 
 ### Silex
-SLX_Hash designed for handy integration of the Library with [Silex framework](http://silex.sensiolabs.org/).
+SLX_Hash designed for handy integration the Library with [Silex framework](http://silex.sensiolabs.org/).
 
 Access to the Library implemented via ServiceProvider:
 

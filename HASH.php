@@ -12,7 +12,7 @@ use \Exception;
  */
 abstract class HASH
 {
-	const VERSION = 1.1;
+	const VERSION = 1.2;
 	/**
 	 * Strategies.
 	 */
@@ -39,6 +39,10 @@ abstract class HASH
 	const COMMON = 0;
 	const PASSWORD = 1;
 	const EMAIL = 2;
+	/**
+	 * @var bool
+	 */
+	public static $included = true;
 	/**
 	 * Map.
 	 */
@@ -109,7 +113,9 @@ abstract class HASH
 			}
 			$file = self::$_strategiesMap[$config['strategy']];
 			$strategy = "HASH\\strategies\\{$file}";
-			class_exists($strategy, false) or require "HASH/strategies/{$file}.php";
+			if (self::$included) {
+				class_exists($strategy, false) or require "HASH/strategies/{$file}.php";
+			}
 			self::$_instances[$task] = new $strategy($config);
 		} elseif ( ! empty($config)) {
 			throw new Exception('_already_exist_and_unmodified');

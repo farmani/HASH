@@ -4,8 +4,11 @@
  * @link http://www.kamilsk.com/
  */
 namespace HASH\abstracts;
+use HASH\HASH;
 use \Exception;
-class_exists('HASH\abstracts\SimpleSalted', false) or require 'SimpleSalted.php';
+if (HASH::$included) {
+	class_exists('HASH\abstracts\SimpleSalted', false) or require 'SimpleSalted.php';
+}
 /**
  * @package HASH.abstracts
  * @since 1.1

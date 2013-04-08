@@ -4,8 +4,11 @@
  * @link http://www.kamilsk.com/
  */
 namespace HASH\strategies;
+use HASH\HASH;
 use HASH\abstracts\SimpleSalted;
-class_exists('HASH\abstracts\SimpleSalted', false) or require 'HASH/abstracts/SimpleSalted.php';
+if (HASH::$included) {
+	class_exists('HASH\abstracts\SimpleSalted', false) or require 'HASH/abstracts/SimpleSalted.php';
+}
 /**
  * @package HASH.strategies
  * @since 1.0

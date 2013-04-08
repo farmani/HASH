@@ -4,8 +4,11 @@
  * @link http://www.kamilsk.com/
  */
 namespace HASH\strategies;
+use HASH\HASH;
 use HASH\abstracts\SimpleHash;
-class_exists('HASH\abstracts\SimpleHash', false) or require 'HASH/abstracts/SimpleHash.php';
+if (HASH::$included) {
+	class_exists('HASH\abstracts\SimpleHash');
+}
 /**
  * @package HASH.strategies
  * @since 1.0
