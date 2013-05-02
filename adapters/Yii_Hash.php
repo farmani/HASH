@@ -12,7 +12,7 @@ use \Exception;
  * @package HASH.adapters
  * @since 1.2
  */
-class YII_Hash extends CApplicationComponent
+class Yii_Hash extends CApplicationComponent
 {
 	protected $_strategies;
 

@@ -58,14 +58,14 @@ Yii_Hash designed for handy integration the Library with [Yii framework](http://
 
 Setup configuration of the Library:
 ```php
-Yii::setPathOfAlias('HASH', 'path/to/folder/which/contains/HASH'); // set namespace
+Yii::setPathOfAlias('HASH', 'path/to/HASH'); // set namespace
 
 return array(
 	...,
 	'components' => array(
 		...,
 		'hash' => array(
-			'class' => 'HASH\adapters\YII_Hash',
+			'class' => 'HASH\adapters\Yii_Hash',
 			'strategies' => array(
 				'pass' => array(
 					'strategy' => HASH\HASH::BLOWFISH_RANDOM_SALT,
