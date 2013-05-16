@@ -22,4 +22,11 @@ interface iHash
 	 * @return bool
 	 */
 	public function compare($actual, $expected);
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 * @since 1.3
+	 */
+	public function isHashed($password);
 }

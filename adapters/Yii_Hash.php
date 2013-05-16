@@ -5,9 +5,9 @@
  */
 namespace HASH\adapters;
 use HASH\HASH;
-use \Yii;
 use \CApplicationComponent;
 use \Exception;
+use \Yii;
 /**
  * @package HASH.adapters
  * @since 1.2

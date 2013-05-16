@@ -23,4 +23,13 @@ final class Sha1Salt extends SimpleSalted
 	{
 		return sha1("{$string}{$this->_salt}");
 	}
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 */
+	public function isHashed($password)
+	{
+		return (bool) preg_match('/^[a-f0-9]{40}$/i', $password);
+	}
 }

@@ -5,12 +5,12 @@
  */
 namespace HASH\adapters;
 use HASH\HASH;
-use \Silex\Application;
-use \Silex\ServiceProviderInterface;
+use Silex\Application;
+use Silex\ServiceProviderInterface;
 class_exists('HASH\HASH') or require 'HASH/HASH.php';
 /**
  * @package HASH.adapters
- * @since 1.0
+ * @since 1.1
  */
 class SLX_Hash implements ServiceProviderInterface
 {

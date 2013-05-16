@@ -31,4 +31,13 @@ final class BlowfishRandomSalt extends SimpleBlowfish
 		$salt .= '$';
 		return $salt;
 	}
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 */
+	public function isHashed($password)
+	{
+		return (bool) preg_match('/^\$\da\$\d{2}\$[.\/a-z0-9]{53}$/i', $password);
+	}
 }

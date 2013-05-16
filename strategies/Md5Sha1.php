@@ -23,4 +23,13 @@ final class Md5Sha1 extends SimpleHash
 	{
 		return md5(sha1($string));
 	}
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 */
+	public function isHashed($password)
+	{
+		return (bool) preg_match('/^[a-f0-9]{32}$/i', $password);
+	}
 }

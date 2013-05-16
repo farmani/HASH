@@ -51,12 +51,23 @@ if ($crypt->compare($input, $stored)) {
 }
 ```
 
+New feature in version 1.3:
+
+```php
+if ($crypt->isHashed($password)) {
+	echo 'Is hashed';
+} else {
+	echo 'Is not hashed';
+}
+```
+
 
 ## Adapters
 ### Yii
 Yii_Hash designed for handy integration the Library with [Yii framework](http://www.yiiframework.com/).
 
 Setup configuration of the Library:
+
 ```php
 Yii::setPathOfAlias('HASH', 'path/to/HASH'); // set namespace
 
@@ -68,7 +79,7 @@ return array(
 			'class' => 'HASH\adapters\Yii_Hash',
 			'strategies' => array(
 				'pass' => array(
-					'strategy' => HASH\HASH::BLOWFISH_RANDOM_SALT,
+					'strategy' => 17, // or HASH\HASH::BLOWFISH_RANDOM_SALT,
 					'cost' => 12,
 				),
 			),
@@ -78,6 +89,7 @@ return array(
 ```
 
 After that you can use it as usual component Yii:
+
 ```php
 $hash = Yii::app()->hash->pass->make($input);
 
@@ -85,6 +97,28 @@ if (Yii::app()->hash->pass->compare($input, $stored)) {
 	echo 'Match';
 } else {
 	echo 'Do not match';
+}
+```
+
+Use new method iHash::isHashed() in ActiveRecord:
+
+```php
+class User extends CActiveRecord
+{
+	protected function beforeSave()
+	{
+		if (parent::beforeSave()) {
+			/**
+			 * @var iHash $crypt
+			 */
+			$crypt = Yii::app()->hash->pass;
+			if ( ! $crypt->isHashed($this->password)) {
+				$this->password = $crypt->make($this->password);
+			}
+			return true;
+		}
+		return false;
+	}
 }
 ```
 
@@ -140,7 +174,7 @@ SLX_Hash designed for handy integration the Library with [Silex framework](http:
 Access to the Library implemented via ServiceProvider:
 
 ```php
-use \HASH\adapters\SLX_Hash as Hash;
+use HASH\adapters\SLX_Hash as Hash;
 $app->register(new Hash(), array(
 	'hash.task' => HASH::SHA1_MD5_SALT,
 	'hash.config' => array(

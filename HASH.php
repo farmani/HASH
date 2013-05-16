@@ -12,7 +12,7 @@ use \Exception;
  */
 abstract class HASH
 {
-	const VERSION = 1.2;
+	const VERSION = 1.3;
 	/**
 	 * Strategies.
 	 */

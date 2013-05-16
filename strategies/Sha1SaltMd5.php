@@ -23,4 +23,13 @@ final class Sha1SaltMd5 extends SimpleSalted
 	{
 		return sha1(md5("{$this->_salt}{$string}"));
 	}
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 */
+	public function isHashed($password)
+	{
+		return (bool) preg_match('/^[a-f0-9]{40}$/i', $password);
+	}
 }

@@ -28,4 +28,13 @@ final class BlowfishSalt extends SimpleBlowfish
 		}
 		parent::__construct($config);
 	}
+
+	/**
+	 * @param string $password
+	 * @return bool
+	 */
+	public function isHashed($password)
+	{
+		return (bool) preg_match('/^\$\da\$\d{2}\$[.\/a-z0-9]{53}$/i', $password);
+	}
 }
